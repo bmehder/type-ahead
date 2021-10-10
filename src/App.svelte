@@ -31,9 +31,9 @@
 <form use:getData={endpoint}>
   <input
     bind:this={inputEl}
-    placeholder="City or State"
     bind:value
     on:keyup={handlePress}
+    placeholder="City or State"
   />
   <ul>
     {#if value !== ''}
