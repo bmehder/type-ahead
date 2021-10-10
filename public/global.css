@@ -1,0 +1,14 @@
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffc600;
+  font-family: 'helvetica neue';
+  font-size: 18px;
+  font-weight: 200;
+}
