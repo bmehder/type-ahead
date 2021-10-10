@@ -2,9 +2,9 @@
   const endpoint =
     'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
 
-  let inputEl
+  let inputEl = null
   let value = ''
-  let allCities
+  let allCities = null
   let filteredPlaces = []
 
   $: inputEl?.focus()
@@ -43,9 +43,6 @@
           <span>{formatNumber.format(population)}</span>
         </li>
       {/each}
-    {:else}
-      <li>Filter for a city</li>
-      <li>or a state</li>
     {/if}
   </ul>
 </form>
@@ -55,7 +52,6 @@
     max-width: 400px;
     margin: 50px auto;
   }
-
   input {
     margin: 0;
     padding: 20px;
@@ -71,7 +67,6 @@
     font-size: 40px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
   }
-
   li {
     background: white;
     list-style: none;
@@ -84,17 +79,14 @@
     justify-content: space-between;
     text-transform: capitalize;
   }
-
   li:nth-child(even) {
     transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
     background: linear-gradient(to bottom, #ffffff 0%, #efefef 100%);
   }
-
   li:nth-child(odd) {
     transform: perspective(100px) rotateX(-3deg) translateY(3px);
     background: linear-gradient(to top, #ffffff 0%, #efefef 100%);
   }
-
   span:last-child {
     font-size: 15px;
   }
