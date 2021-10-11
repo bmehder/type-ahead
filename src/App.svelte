@@ -7,30 +7,8 @@
   let value = ''
   let allCities = null
   let filteredPlaces = []
-  let cityName
-  let stateName
 
   $: inputEl?.focus()
-
-  $: filteredPlaces.map(place => {
-    const regex = new RegExp(value, 'gi')
-    if (place.city.toLowerCase().startsWith(value.toLowerCase())) {
-      cityName = place.city.replace(
-        regex,
-        `<span class="highlight">${value}</span>`
-      )
-    } else {
-      cityName = place.city.toLowerCase().startsWith(value.toLowerCase())
-    }
-    // if (place.state.toLowerCase().startsWith(value.toLowerCase())) {
-    //   stateName = place.state.replace(
-    //     regex,
-    //     `<span class="highlight">${value}</span>`
-    //   )
-    // } else {
-    //   stateName = place.state.toLowerCase().startsWith(value.toLowerCase())
-    // }
-  })
 
   const handlePress = () => {
     filteredPlaces = allCities.filter(place => {
@@ -60,7 +38,7 @@
     {#if value !== ''}
       {#each filteredPlaces as { city, state, population }}
         <li>
-          <span>{@html cityName || city}, {@html stateName || state}</span>
+          <span>{city}, {state}</span>
           <span>{formatNumber.format(population)}</span>
         </li>
       {/each}
@@ -110,8 +88,5 @@
   }
   span:last-child {
     font-size: 15px;
-  }
-  :global(.highlight) {
-    background: #ffc600;
   }
 </style>
