@@ -1,15 +1,36 @@
 <script>
   const endpoint =
     'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
+  const formatNumber = new Intl.NumberFormat('en-US')
 
   let inputEl = null
   let value = ''
   let allCities = null
   let filteredPlaces = []
+  let cityName
+  let stateName
 
   $: inputEl?.focus()
 
-  const formatNumber = new Intl.NumberFormat('en-US')
+  $: filteredPlaces.map(place => {
+    const regex = new RegExp(value, 'gi')
+    if (place.city.toLowerCase().startsWith(value.toLowerCase())) {
+      cityName = place.city.replace(
+        regex,
+        `<span class="highlight">${value}</span>`
+      )
+    } else {
+      cityName = place.city.toLowerCase().startsWith(value.toLowerCase())
+    }
+    if (place.state.toLowerCase().startsWith(value.toLowerCase())) {
+      stateName = place.state.replace(
+        regex,
+        `<span class="highlight">${value}</span>`
+      )
+    } else {
+      stateName = place.state.toLowerCase().startsWith(value.toLowerCase())
+    }
+  })
 
   const handlePress = () => {
     filteredPlaces = allCities.filter(place => {
@@ -39,7 +60,7 @@
     {#if value !== ''}
       {#each filteredPlaces as { city, state, population }}
         <li>
-          <span>{city}, {state}</span>
+          <span>{@html cityName || city}, {@html stateName || state}</span>
           <span>{formatNumber.format(population)}</span>
         </li>
       {/each}
@@ -77,7 +98,7 @@
     transition: background 0.2s;
     display: flex;
     justify-content: space-between;
-    text-transform: capitalize;
+    text-transform: uppercase;
   }
   li:nth-child(even) {
     transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
@@ -89,5 +110,8 @@
   }
   span:last-child {
     font-size: 15px;
+  }
+  :global(.highlight) {
+    background: #ffc600;
   }
 </style>
