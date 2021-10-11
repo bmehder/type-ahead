@@ -12,10 +12,11 @@
 
   const handlePress = () => {
     filteredPlaces = allCities.filter(place => {
-      return (
-        place.city.toLowerCase().startsWith(value.toLowerCase()) ||
-        place.state.toLowerCase().startsWith(value.toLowerCase())
-      )
+      // return (
+      //   place.city.toLowerCase().startsWith(value.toLowerCase()) ||
+      //   place.state.toLowerCase().startsWith(value.toLowerCase())
+      // )
+      return place.city.toLowerCase().startsWith(value.toLowerCase())
     })
   }
 
@@ -32,13 +33,16 @@
     bind:this={inputEl}
     bind:value
     on:keyup={handlePress}
-    placeholder="City or State"
+    placeholder="Search City"
   />
   <ul>
     {#if value !== ''}
       {#each filteredPlaces as { city, state, population }}
         <li>
-          <span>{city}, {state}</span>
+          <span
+            >{@html `<span class="highlight">${value}</span>` +
+              city.toLowerCase().replace(value, '')}, {state}</span
+          >
           <span>{formatNumber.format(population)}</span>
         </li>
       {/each}
@@ -88,5 +92,8 @@
   }
   span:last-child {
     font-size: 15px;
+  }
+  :global(.highlight) {
+    background: #ffc600;
   }
 </style>
