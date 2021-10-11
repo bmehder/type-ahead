@@ -41,7 +41,7 @@
         <li>
           <span
             >{@html `<span class="highlight">${value}</span>` +
-              city.toLowerCase().replace(value, '')}, {state}</span
+              city.toLowerCase().replace(value.toLowerCase(), '')}, {state}</span
           >
           <span>{formatNumber.format(population)}</span>
           <span>Rank: {rank}</span>
