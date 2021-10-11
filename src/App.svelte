@@ -22,14 +22,14 @@
     } else {
       cityName = place.city.toLowerCase().startsWith(value.toLowerCase())
     }
-    if (place.state.toLowerCase().startsWith(value.toLowerCase())) {
-      stateName = place.state.replace(
-        regex,
-        `<span class="highlight">${value}</span>`
-      )
-    } else {
-      stateName = place.state.toLowerCase().startsWith(value.toLowerCase())
-    }
+    // if (place.state.toLowerCase().startsWith(value.toLowerCase())) {
+    //   stateName = place.state.replace(
+    //     regex,
+    //     `<span class="highlight">${value}</span>`
+    //   )
+    // } else {
+    //   stateName = place.state.toLowerCase().startsWith(value.toLowerCase())
+    // }
   })
 
   const handlePress = () => {
