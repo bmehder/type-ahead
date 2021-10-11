@@ -37,13 +37,14 @@
   />
   <ul>
     {#if value !== ''}
-      {#each filteredPlaces as { city, state, population }}
+      {#each filteredPlaces as { city, state, population, rank }}
         <li>
           <span
             >{@html `<span class="highlight">${value}</span>` +
               city.toLowerCase().replace(value, '')}, {state}</span
           >
           <span>{formatNumber.format(population)}</span>
+          <span>Rank: {rank}</span>
         </li>
       {/each}
     {/if}
@@ -79,7 +80,7 @@
     padding: 20px;
     transition: background 0.2s;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     text-transform: uppercase;
   }
   li:nth-child(even) {
@@ -90,7 +91,14 @@
     transform: perspective(100px) rotateX(-3deg) translateY(3px);
     background: linear-gradient(to top, #ffffff 0%, #efefef 100%);
   }
-  span:last-child {
+  span {
+    flex: 1;
+  }
+  span:first-child {
+    flex: 3;
+  }
+  span:nth-child(2),
+  span:nth-child(3) {
     font-size: 15px;
   }
   :global(.highlight) {
